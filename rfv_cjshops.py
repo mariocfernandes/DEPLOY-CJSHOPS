@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 from datetime import datetime
 import xlrd
+import openpyxl
 
 #pd.options.display.float_format = '${:,.2f}'.format
 
@@ -21,9 +22,9 @@ colunas2 = ['Codigo_Cliente','Qtde','Desc Produto','Desc Cor Produto','Dt_Venda'
 
 @st.cache
 def get_data1():
-    return pd.read_excel(arquivo1, dtype = {'Codigo_Cliente':object,'valor_monetario':float},usecols = colunas1)
+    return pd.read_excel(arquivo1, dtype = {'Codigo_Cliente':object,'valor_monetario':float},usecols = colunas1, engine = 'openpyxl')
 def get_data2():
-    return pd.read_excel(arquivo2, dtype = {'Codigo_Cliente':object}, usecols = colunas2)
+    return pd.read_excel(arquivo2, dtype = {'Codigo_Cliente':object}, usecols = colunas2, engine = 'openpyxl')
 
 
 df1 = get_data1()
