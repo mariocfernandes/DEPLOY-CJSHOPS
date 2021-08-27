@@ -18,9 +18,9 @@ colunas2 = ['Codigo_Cliente','Qtde','Desc Produto','Desc Cor Produto','Dt_Venda'
 
 @st.cache
 def get_data1():
-    return pd.read_excel(arquivo1, dtype = {'Codigo_Cliente':object,'valor_monetario':float},usecols = colunas1, engine = 'openpyxl')
+    return pd.read_excel(arquivo1, dtype = {'Codigo_Cliente':object,'valor_monetario':float,'Ddd':object,'Telefone':object},usecols = colunas1, engine = 'openpyxl')[colunas1]
 def get_data2():
-    return pd.read_excel(arquivo2, dtype = {'Codigo_Cliente':object}, usecols = colunas2,engine = 'openpyxl')
+    return pd.read_excel(arquivo2, dtype = {'Codigo_Cliente':object}, usecols = colunas2,engine = 'openpyxl')[colunas2]
 
 
 df1 = get_data1()
@@ -33,6 +33,8 @@ escolha_vendedor = st.selectbox('Vendedor',lista_vendedor)
 
 
 df3  = df1[df1.vendedor == escolha_vendedor]
+
+st.table(df3.Segmento.value_counts().to_frame(name='Qtde'))
 
 lista_segmentos = df3.Segmento.unique()
 
